@@ -17,13 +17,18 @@ namespace UWPUtilities.BackgroundTransfer
     {
         #region Singleton
 
-        public static readonly BackgroundTransferManager Instance = new BackgroundTransferManager();
-
-        // Explicit static constructor to tell C# compiler
-        // not to mark type as beforefieldinit
-        static BackgroundTransferManager() { }
+        public static BackgroundTransferManager Instance { get { return BacgroundTransferManagerSingleton.Instance; } }
 
         private BackgroundTransferManager() { }
+
+        private sealed class BacgroundTransferManagerSingleton
+        {
+            // Explicit static constructor to tell C# compiler
+            // not to mark type as beforefieldinit
+            static BacgroundTransferManagerSingleton() { }
+
+            internal static readonly BackgroundTransferManager Instance = new BackgroundTransferManager();
+        }
 
         #endregion
 
