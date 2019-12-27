@@ -41,18 +41,24 @@ namespace UWPUtilities.Adapter.Net
             }
         }
 
-        public async Task<string> GetAsync(string uriString)
+        public Task<string> GetAsync(string uriString)
         {
-            ValidateUri(uriString, out Uri uri);
-            var response = await HttpClient.GetAsync(uri);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
+            return SendAsync(uriString, HttpMethod.Get);
         }
 
-        public async Task<string> PostAsync(string uriString, IHttpContent content)
+        public Task<string> PostAsync(string uriString, IHttpContent content)
+        {
+            return SendAsync(uriString, HttpMethod.Post, content);
+        }
+
+        public async Task<string> SendAsync(string uriString, HttpMethod httpMethod, IHttpContent content = default)
         {
             ValidateUri(uriString, out Uri uri);
-            var response = await HttpClient.PostAsync(uri, content);
+            var request = new HttpRequestMessage(httpMethod, uri)
+            {
+                Content = content
+            };
+            var response = await HttpClient.SendRequestAsync(request);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
