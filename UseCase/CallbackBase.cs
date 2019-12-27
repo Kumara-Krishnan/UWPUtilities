@@ -10,7 +10,7 @@ namespace UWPUtilities.UseCase
     {
         void OnSuccess(IUseCaseResponse<R> response);
 
-        void OnError(UseCaseError response);
+        void OnError(UseCaseError error);
 
         void OnFailed(IUseCaseResponse<R> response);
 
@@ -26,7 +26,7 @@ namespace UWPUtilities.UseCase
     {
         public abstract void OnSuccess(IUseCaseResponse<R> response);
 
-        public abstract void OnError(UseCaseError response);
+        public abstract void OnError(UseCaseError error);
 
         public void OnCanceled(IUseCaseResponse<R> response) { }
 
