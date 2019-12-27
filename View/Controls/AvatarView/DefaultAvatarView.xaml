@@ -1,0 +1,53 @@
+﻿<ResourceDictionary x:Class="UWPUtilities.View.Controls.AvatarView.DefaultAvatarView"
+                    x:ClassModifier="public"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:UWPUtilities.View.Controls.AvatarView">
+
+    <Style x:Key="DefaultAvatarViewStyle" TargetType="local:AvatarView">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:AvatarView">
+                    <Grid x:Name="RootGrid">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Photo">
+                                    <VisualState.Setters>
+                                        <Setter Target="PhotoEllipse.Visibility" Value="Visible"/>
+                                        <Setter Target="PhotoEllipse.Opacity" Value="1"/>
+                                        <Setter Target="InitialsBlock.Visibility" Value="Collapsed"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Initials">
+                                    <VisualState.Setters>
+                                        <Setter Target="PhotoEllipse.Visibility" Value="Visible"/>
+                                        <Setter Target="PhotoEllipse.Opacity" Value="1"/>
+                                        <Setter Target="InitialsBlock.Visibility" Value="Collapsed"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="NoPhotoOrInitials"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Ellipse x:Name="BackgroundEllipse" 
+                                 Fill="{TemplateBinding Background}"
+                                 Stroke="{TemplateBinding BorderBrush}"
+                                 StrokeThickness="2"/>
+                        <TextBlock x:Name="InitialsBlock" />
+                        <Ellipse x:Name="PhotoEllipse">
+                            <Ellipse.Fill>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <BitmapImage UriSource="{TemplateBinding ImageSource}" ImageFailed="OnPhotoFailed"/>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Ellipse.Fill>
+                            <Ellipse.OpacityTransition>
+                                <ScalarTransition/>
+                            </Ellipse.OpacityTransition>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
