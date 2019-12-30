@@ -161,6 +161,7 @@
     <Compile Include="Util\FileSystemUtil.cs" />
     <Compile Include="Util\ObservableObject.cs" />
     <Compile Include="Util\DispatcherTimeoutExecutor.cs" />
+    <Compile Include="Util\CredentialLocker.cs" />
     <Compile Include="Util\ViewModelBase.cs" />
     <Compile Include="View\Contract\IRootShell.cs" />
     <Compile Include="View\Contract\IView.cs" />
