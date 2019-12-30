@@ -16,5 +16,7 @@ namespace UWPUtilities.Adapter.Net.Contract
         Task<string> PostAsync(string uriString, IHttpContent content = default);
 
         Task<string> SendAsync(string uriString, HttpMethod httpMethod, IHttpContent content);
+
+        Task<string> SendAsync(HttpRequestMessage requestMessage);
     }
 }

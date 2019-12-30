@@ -63,6 +63,13 @@ namespace UWPUtilities.Adapter.Net
             return await response.Content.ReadAsStringAsync();
         }
 
+        public async Task<string> SendAsync(HttpRequestMessage requestMessage)
+        {
+            var response = await HttpClient.SendRequestAsync(requestMessage);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
+        }
+
         private void ValidateUri(string uriString, out Uri uri)
         {
             if (!Uri.TryCreate(uriString, UriKind.RelativeOrAbsolute, out uri))
