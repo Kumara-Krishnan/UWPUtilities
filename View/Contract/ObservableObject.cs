@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace UWPUtilities.Util
+namespace UWPUtilities.View.Contract
 {
     public abstract class ObservableObject : INotifyPropertyChanged
     {

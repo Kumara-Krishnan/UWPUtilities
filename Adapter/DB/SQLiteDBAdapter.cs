@@ -62,7 +62,13 @@ namespace UWPUtilities.Adapter.DB
         public int InsertOrReplace<T>(T element) where T : new()
         {
             ThrowIfDBNotInitialized();
-            return DBConnection.InsertOrReplace(element);
+            return DBConnection.InsertOrReplace(element, typeof(T));
+        }
+
+        public int InsertOrReplace(object element, Type objType)
+        {
+            ThrowIfDBNotInitialized();
+            return DBConnection.InsertOrReplace(element, objType);
         }
 
         public int InsertOrReplaceAll<T>(IEnumerable<T> elements) where T : new()
@@ -72,7 +78,20 @@ namespace UWPUtilities.Adapter.DB
             {
                 foreach (var element in elements)
                 {
-                    count += DBConnection.InsertOrReplace(element);
+                    count += DBConnection.InsertOrReplace(element, typeof(T));
+                }
+            });
+            return count;
+        }
+
+        public int InsertOrReplaceAll(IEnumerable<object> elements, Type objType)
+        {
+            int count = 0;
+            RunInTransaction(() =>
+            {
+                foreach (var element in elements)
+                {
+                    count += DBConnection.InsertOrReplace(element, objType);
                 }
             });
             return count;
@@ -100,6 +119,12 @@ namespace UWPUtilities.Adapter.DB
         {
             ThrowIfDBNotInitialized();
             return DBConnection.ExecuteScalar<T>(query, args);
+        }
+
+        public T Find<T>(object pk) where T : new()
+        {
+            ThrowIfDBNotInitialized();
+            return DBConnection.Find<T>(pk);
         }
 
         public T FindWithQuery<T>(string query, params object[] args) where T : new()

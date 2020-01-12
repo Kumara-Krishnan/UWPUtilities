@@ -26,4 +26,14 @@ namespace UWPUtilities.UseCase
             CTS = cts;
         }
     }
+
+    public class AuthenticatedUseCaseRequest : UseCaseRequest
+    {
+        public string UserName { get; set; }
+
+        public AuthenticatedUseCaseRequest(RequestType type, string userName, CancellationTokenSource cts = default) : base(type, cts)
+        {
+            UserName = userName;
+        }
+    }
 }

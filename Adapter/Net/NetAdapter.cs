@@ -51,6 +51,12 @@ namespace UWPUtilities.Adapter.Net
             return SendAsync(uriString, HttpMethod.Post, content);
         }
 
+        public Task<string> PostAsync(string uriString, IEnumerable<KeyValuePair<string, string>> requestParameters)
+        {
+            var content = new HttpFormUrlEncodedContent(requestParameters);
+            return PostAsync(uriString, content);
+        }
+
         public async Task<string> SendAsync(string uriString, HttpMethod httpMethod, IHttpContent content = default)
         {
             ValidateUri(uriString, out Uri uri);

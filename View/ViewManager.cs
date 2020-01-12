@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +22,9 @@ namespace UWPUtilities.View
 
         public int ActiveViewId { get; set; } = -1;
 
-        private static readonly ConcurrentDictionary<string, int> ViewWindowMapping = new ConcurrentDictionary<string, int>();
+        private readonly ConcurrentDictionary<string, int> ViewWindowMapping = new ConcurrentDictionary<string, int>();
 
-        private static readonly ConcurrentDictionary<int, AppWindow> AppWindows = new ConcurrentDictionary<int, AppWindow>();
+        private readonly ConcurrentDictionary<int, AppWindow> AppWindows = new ConcurrentDictionary<int, AppWindow>();
 
         private ViewManager()
         {

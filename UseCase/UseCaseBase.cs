@@ -23,21 +23,23 @@ namespace UWPUtilities.UseCase
             PresenterCallback = presenterCallback;
         }
 
-        public void Execute()
+        public async void Execute()
         {
             List<Exception> exceptions = default;
             try
             {
                 GetFromCache();
             }
-            catch (Exception cacheException)
-            {
-                exceptions.InitializeIfNull();
-                exceptions.Add(cacheException);
-            }
+            catch { }
+            //(Exception cacheException)
+            //{
+            //    exceptions.InitializeIfNull();
+            //    exceptions.Add(cacheException);
+            //}
+
             try
             {
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     Action();
                 }, CancellationToken).ConfigureAwait(false);
@@ -59,7 +61,14 @@ namespace UWPUtilities.UseCase
             {
                 if (exceptions.IsNonEmpty())
                 {
-                    PresenterCallback?.OnError(ErrorType.Unknown, new AggregateException(exceptions));
+                    if (exceptions.Count > 1)
+                    {
+                        PresenterCallback?.OnError(ErrorType.Unknown, new AggregateException(exceptions));
+                    }
+                    else
+                    {
+                        PresenterCallback?.OnError(ErrorType.Unknown, exceptions.FirstOrDefault());
+                    }
                 }
             }
         }
