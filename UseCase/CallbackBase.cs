@@ -28,10 +28,10 @@ namespace UWPUtilities.UseCase
 
         public abstract void OnError(UseCaseError error);
 
-        public void OnCanceled(IUseCaseResponse<R> response) { }
+        public virtual void OnCanceled(IUseCaseResponse<R> response) { }
 
-        public void OnFailed(IUseCaseResponse<R> response) { }
+        public virtual void OnFailed(IUseCaseResponse<R> response) { }
 
-        public void OnProgress(IUseCaseResponse<R> response) { }
+        public virtual void OnProgress(IUseCaseResponse<R> response) { }
     }
 }

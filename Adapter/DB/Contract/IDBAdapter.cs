@@ -21,7 +21,11 @@ namespace UWPUtilities.Adapter.DB.Contract
 
         int InsertOrReplace<T>(T element) where T : new();
 
+        int InsertOrReplace(object element, Type objType);
+
         int InsertOrReplaceAll<T>(IEnumerable<T> elements) where T : new();
+
+        int InsertOrReplaceAll(IEnumerable<object> elements, Type objType);
 
         IList<T> Table<T>() where T : new();
 
@@ -30,6 +34,8 @@ namespace UWPUtilities.Adapter.DB.Contract
         int Execute(string query, params object[] args);
 
         T ExecuteScalar<T>(string query, params object[] args);
+
+        T Find<T>(object pk) where T : new();
 
         T FindWithQuery<T>(string query, params object[] args) where T : new();
 

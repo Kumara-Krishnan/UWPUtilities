@@ -143,11 +143,17 @@
     <Compile Include="BackgroundTransfer\Upload\Contract\IBackgroundUploadResponse.cs" />
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Error\NoInternetAccessException.cs" />
+    <Compile Include="Extension\BoolExtension.cs" />
     <Compile Include="Extension\DispatcherExtension.cs" />
+    <Compile Include="Extension\JObjectExtension.cs" />
+    <Compile Include="Extension\StringExtension.cs" />
     <Compile Include="Extension\IEnumerableExtension.cs" />
+    <Compile Include="Extension\IViewExtension.cs" />
     <Compile Include="Extension\JTokenExtension.cs" />
     <Compile Include="Extension\ListExtension.cs" />
     <Compile Include="Extension\ListViewExtension.cs" />
+    <Compile Include="Extension\SettingsBaseExtension.cs" />
+    <Compile Include="Model\SettingsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UseCase\CallbackBase.cs" />
     <Compile Include="UseCase\CallbackExtension.cs" />
@@ -159,10 +165,11 @@
     <Compile Include="UseCase\UseCaseResponse.cs" />
     <Compile Include="Util\AppSettingsUtil.cs" />
     <Compile Include="Util\FileSystemUtil.cs" />
-    <Compile Include="Util\ObservableObject.cs" />
+    <Compile Include="Util\NetworkConnectivity.cs" />
+    <Compile Include="View\Contract\ObservableObject.cs" />
     <Compile Include="Util\DispatcherTimeoutExecutor.cs" />
     <Compile Include="Util\CredentialLocker.cs" />
-    <Compile Include="Util\ViewModelBase.cs" />
+    <Compile Include="View\Contract\ViewModelBase.cs" />
     <Compile Include="View\Contract\IRootShell.cs" />
     <Compile Include="View\Contract\IView.cs" />
     <Compile Include="View\PageNavigationParameter.cs" />
@@ -196,7 +203,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Constant\" />
-    <Folder Include="DI\" />
     <Folder Include="Theme\" />
   </ItemGroup>
   <ItemGroup>

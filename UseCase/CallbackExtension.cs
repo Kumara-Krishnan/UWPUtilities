@@ -8,13 +8,34 @@ namespace UWPUtilities.UseCase
 {
     public static class CallbackExtension
     {
-        public static void OnSuccess<R>(this ICallback<R> callback, IUseCaseResponse<R> response,
-            Predicate<IUseCaseResponse<R>> predicate)
+        public static void OnSuccessOrFailed<R>(this ICallback<R> callback, UseCaseResponse<R> response,
+            Predicate<UseCaseResponse<R>> predicate)
         {
             if (predicate(response))
             {
                 callback?.OnSuccess(response);
             }
+            else
+            {
+                callback?.OnFailed(response.Type, ResponseStatus.Failed);
+            }
+        }
+
+        public static void OnSuccessOrFailed<R>(this ICallback<R> callback, ResponseType responseType, R response, Predicate<R> predicate)
+        {
+            if (predicate(response))
+            {
+                callback?.OnSuccess(responseType, ResponseStatus.Success, response);
+            }
+            else
+            {
+                callback?.OnFailed(responseType, ResponseStatus.Failed);
+            }
+        }
+
+        public static void OnSuccess<R>(this ICallback<R> callback, ResponseType type, ResponseStatus status, R response)
+        {
+            callback?.OnSuccess(new UseCaseResponse<R>(type, status, response));
         }
 
         public static void OnError<R>(this ICallback<R> callback, ErrorType type, Exception exception)

@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.AccessCache;
 
 namespace UWPUtilities.Util
 {
@@ -22,6 +24,27 @@ namespace UWPUtilities.Util
 
     public static class FileSystemUtil
     {
+        public static async Task<StorageFolder> PickFolderAsync(PickerLocationId startLocation = PickerLocationId.Unspecified,
+            PickerViewMode viewMode = PickerViewMode.List, bool storeInFutureAccessList = false)
+        {
+            var folderPicker = new FolderPicker();
+            folderPicker.SuggestedStartLocation = startLocation;
+            folderPicker.ViewMode = viewMode;
+            var folder = await folderPicker.PickSingleFolderAsync();
+            StorageApplicationPermissions.MostRecentlyUsedList.AddOrReplace(folder.FolderRelativeId, folder, folder.Path);
+            if (storeInFutureAccessList)
+            {
+                StorageApplicationPermissions.FutureAccessList.AddOrReplace(folder.FolderRelativeId, folder, folder.Path);
+            }
+            return folder;
+        }
+
+        public static async Task GetStorageFolderAsync(string path)
+        {
+            StorageFile file = default;
+            var folder = await file.GetParentAsync();
+        }
+
         public static async Task<StorageFolder> GetStorageFolderAsync(string path, ApplicationFolderType applicationFolderType = ApplicationFolderType.Local)
         {
             StorageFolder localFolder = GetApplicationFolder(applicationFolderType);
@@ -82,7 +105,7 @@ namespace UWPUtilities.Util
             var storageItems = await storageFolder.GetItemsAsync();
             bool isSucceeded = true;
             foreach (var storageItem in storageItems)
-            { 
+            {
                 try
                 {
                     await storageItem.DeleteAsync(deleteOption);

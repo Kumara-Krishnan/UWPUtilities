@@ -90,6 +90,17 @@ namespace UWPUtilities.Extension
         }
 
         /// <summary>
+        /// Returns a <see cref="ulong"/> value mapped by the property name if it exists, coercing it if necessary.
+        /// Throws if it cannot be explicitly cast to a <see cref="ulong"/>
+        /// </summary>
+        /// <param name="key">The key of the property. In case of JArray, key will be the index.</param>
+        /// <param name="defaultValue">the fallback value if the property doesnt exist</param>
+        public static ulong GetULong(this JToken jToken, object key, ulong defaultValue = default)
+        {
+            return jToken.Value(key, defaultValue);
+        }
+
+        /// <summary>
         /// Returns a <see cref="bool"/> value mapped by the property name if it exists, coercing it if necessary.
         /// Throws if it cannot be explicitly cast to a <see cref="bool"/>
         /// </summary>
@@ -98,6 +109,26 @@ namespace UWPUtilities.Extension
         public static bool GetBool(this JToken jToken, object key, bool defaultValue = default)
         {
             return jToken.Value(key, defaultValue);
+        }
+
+        public static bool OptBool(this JToken jToken, object key, bool defaultValue = default)
+        {
+            bool result = defaultValue;
+            try { return jToken.GetBool(key, defaultValue); } catch { }
+            try
+            {
+                int intValue = jToken.GetInt(key, Convert.ToInt32(defaultValue));
+                return Convert.ToBoolean(intValue);
+            }
+            catch { }
+            try
+            {
+                string stringValue = jToken.GetString(key, defaultValue.ToString());
+                return Convert.ToBoolean(stringValue);
+            }
+            catch { }
+            try { result = Convert.ToBoolean(jToken.Value<object>(key)); } catch { }
+            return result;
         }
 
         /// <summary>
