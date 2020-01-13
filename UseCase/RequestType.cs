@@ -25,7 +25,7 @@ namespace UWPUtilities.UseCase
         public static bool HasNetwork(this RequestType requestType)
         {
             return requestType == RequestType.LocalAndNetwork || requestType == RequestType.Network
-                || requestType == RequestType.Network;
+                || requestType == RequestType.Sync;
         }
     }
 }

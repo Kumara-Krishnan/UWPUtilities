@@ -25,17 +25,11 @@ namespace UWPUtilities.UseCase
 
         public async void Execute()
         {
-            List<Exception> exceptions = default;
             try
             {
                 GetFromCache();
             }
             catch { }
-            //(Exception cacheException)
-            //{
-            //    exceptions.InitializeIfNull();
-            //    exceptions.Add(cacheException);
-            //}
 
             try
             {
@@ -54,30 +48,15 @@ namespace UWPUtilities.UseCase
             }
             catch (Exception exception)
             {
-                exceptions.InitializeIfNull();
-                exceptions.Add(exception);
-            }
-            finally
-            {
-                if (exceptions.IsNonEmpty())
-                {
-                    if (exceptions.Count > 1)
-                    {
-                        PresenterCallback?.OnError(ErrorType.Unknown, new AggregateException(exceptions));
-                    }
-                    else
-                    {
-                        PresenterCallback?.OnError(ErrorType.Unknown, exceptions.FirstOrDefault());
-                    }
-                }
+                PresenterCallback?.OnError(ErrorType.Unknown, exception);
             }
         }
 
-        public virtual bool GetFromCache()
+        protected virtual bool GetFromCache()
         {
             return false;
         }
 
-        public abstract void Action();
+        protected abstract void Action();
     }
 }

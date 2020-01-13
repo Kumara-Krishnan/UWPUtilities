@@ -45,6 +45,8 @@ namespace UWPUtilities.Adapter.DB.Contract
 
         void RunInTransaction(Func<Task> func, bool reThrow = false);
 
+        string GetQueryParamPlaceholders(int count);
+
         void Close();
     }
 }
