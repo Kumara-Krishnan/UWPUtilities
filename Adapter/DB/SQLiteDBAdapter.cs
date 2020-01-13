@@ -175,6 +175,18 @@ namespace UWPUtilities.Adapter.DB
             DBConnection = null;
         }
 
+        public string GetQueryParamPlaceholders(int count)
+        {
+            StringBuilder queryParamBuilder = new StringBuilder();
+            for (var i = 0; i < count - 1; i++)
+            {
+                queryParamBuilder.Append("?, ");
+            }
+            if (count > 0) { queryParamBuilder.Append("?"); }
+
+            return queryParamBuilder.ToString();
+        }
+
         private void ThrowIfDBNotInitialized()
         {
             if (!IsDBInitialized)

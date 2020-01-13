@@ -29,11 +29,11 @@ namespace UWPUtilities.UseCase
 
     public class AuthenticatedUseCaseRequest : UseCaseRequest
     {
-        public string UserName { get; set; }
+        public string UserId { get; set; }
 
-        public AuthenticatedUseCaseRequest(RequestType type, string userName, CancellationTokenSource cts = default) : base(type, cts)
+        public AuthenticatedUseCaseRequest(RequestType type, string userId, CancellationTokenSource cts = default) : base(type, cts)
         {
-            UserName = userName;
+            UserId = userId;
         }
     }
 }

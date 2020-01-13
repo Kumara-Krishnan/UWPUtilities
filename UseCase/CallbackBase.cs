@@ -28,9 +28,9 @@ namespace UWPUtilities.UseCase
 
         public abstract void OnError(UseCaseError error);
 
-        public virtual void OnCanceled(IUseCaseResponse<R> response) { }
+        public abstract void OnFailed(IUseCaseResponse<R> response);
 
-        public virtual void OnFailed(IUseCaseResponse<R> response) { }
+        public virtual void OnCanceled(IUseCaseResponse<R> response) { }
 
         public virtual void OnProgress(IUseCaseResponse<R> response) { }
     }
