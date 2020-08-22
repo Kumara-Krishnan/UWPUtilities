@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utilities.Extension;
 using UWPUtilities.Extension;
 using UWPUtilities.WebSocket.Contract;
 using Windows.Networking.Sockets;

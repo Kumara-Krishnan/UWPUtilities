@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UWPUtilities.Extension;
+using Utilities.Extension;
 using Windows.Security.Credentials;
 
 namespace UWPUtilities.Util
