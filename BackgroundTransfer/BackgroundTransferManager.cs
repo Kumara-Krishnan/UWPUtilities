@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UWPUtilities.BackgroundTransfer.Download.Contract;
 using UWPUtilities.BackgroundTransfer.Upload.Contract;
-using UWPUtilities.Collections;
+using Utilities.Collections;
 using UWPUtilities.Util;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
@@ -51,7 +51,7 @@ namespace UWPUtilities.BackgroundTransfer
                     CurrentDownloads.Add(handler);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
